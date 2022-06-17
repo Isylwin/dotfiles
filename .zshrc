@@ -1,5 +1,5 @@
 # Load Antigen
-source "~/antigen.zsh"
+source $HOME/antigen.zsh
 
 # Load Antigen configurations
-antigen init ~/.antigenrc
+antigen init $HOME/.antigenrc
