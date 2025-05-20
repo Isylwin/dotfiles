@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH="/home/oscar/.local/bin:$PATH"
-
 ANTIGEN_LOG=/tmp/logs_antigen
 
 # Load Antigen
@@ -15,10 +13,20 @@ source $HOME/antigen.zsh
 # Load Antigen configurations
 antigen init $HOME/.antigenrc
 
+# Add NeoVim to PATH
+export PATH="$HOME/apps/neovim/bin:$PATH"
+
+# Add .local binaries to PATH 
+export PATH="$HOME/.local/bin:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Add pyenv_root to the PATH variable
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+
+# Initialize pyenv if it is installed
+if [ -x "$(command -v pyenv)" ]; then
+    eval "$(pyenv init - zsh)"
+fi
